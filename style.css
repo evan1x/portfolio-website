@@ -747,6 +747,10 @@ section h3 {
     line-height: 1.6;
 }
 
+.timeline-content ul {
+    padding-left: 1rem;
+}
+
 @keyframes growLine {
     from { height: 0; }
     to { height: 100%; }
@@ -788,22 +792,42 @@ section h3 {
 /* Timeline responsive styles */
 @media (max-width: 768px) {
     .timeline::before {
-        left: 30px;
+        left: 20px;
     }
 
     .timeline-dot {
-        left: 30px;
+        left: 20px;
     }
 
     .timeline-content {
-        width: calc(100% - 80px);
-        margin-left: 60px !important;
+        width: calc(100% - 50px);
+        margin-left: 40px !important;
+        padding: 1.5rem;
+    }
+
+    .timeline-item {
+        margin: 2rem 0;
+        display: flex;
+        align-items: center;
     }
 
     .timeline-item:nth-child(odd) .timeline-content::before,
     .timeline-item:nth-child(even) .timeline-content::before {
-        left: -30px;
+        left: -20px;
         right: auto;
+        width: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .timeline-content h3 {
+        font-size: 1.4rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .timeline-content p {
+        font-size: 1rem;
+        line-height: 1.5;
     }
 }
 
@@ -1345,10 +1369,24 @@ section h3 {
 @media (max-width: 768px) {
     .contact-container {
         grid-template-columns: 1fr;
+        padding: 1rem;
+        gap: 2rem;
     }
     
     .contact-form-container {
-        padding: 2rem;
+        padding: 1.5rem;
+        width: 100%;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        max-width: none;
+        padding: 1rem;
+    }
+
+    .contact {
+        padding: 4rem 1rem;
     }
 }
 
