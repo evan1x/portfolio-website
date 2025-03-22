@@ -1,26 +1,51 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Check if intro has been shown before in this session
+    const hasSeenIntro = localStorage.getItem('hasSeenIntro');
+    
     // Get all sections except intro
     const mainSections = document.querySelectorAll('section:not(#intro-section), nav');
     
-    // Initially hide all sections
-    mainSections.forEach(section => {
-        section.style.opacity = '0';
-        section.style.visibility = 'hidden';
-    });
-
-    // Show intro section
+    // Get intro section
     const introSection = document.getElementById('intro-section');
-    if (introSection) {
+    
+    // If user has already seen the intro, skip it
+    if (hasSeenIntro === 'true' || !introSection) {
+        // Show main sections immediately
+        mainSections.forEach(section => {
+            section.style.opacity = '1';
+            section.style.visibility = 'visible';
+        });
+        
+        // Hide intro section
+        if (introSection) {
+            introSection.style.opacity = '0';
+            introSection.style.visibility = 'hidden';
+        }
+        
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+    } else {
+        // First visit - show the intro
+        
+        // Initially hide all sections
+        mainSections.forEach(section => {
+            section.style.opacity = '0';
+            section.style.visibility = 'hidden';
+        });
+    
+        // Show intro section
         introSection.style.opacity = '1';
         introSection.style.visibility = 'visible';
-    }
-
-    // Create and append particles
-    if (introSection) {
+    
+        // Create and append particles
         const particlesContainer = document.createElement('div');
         particlesContainer.className = 'intro-particles';
         introSection.appendChild(particlesContainer);
-
+    
         for (let i = 0; i < 50; i++) {
             const particle = document.createElement('div');
             particle.className = 'intro-particle';
@@ -31,68 +56,71 @@ document.addEventListener('DOMContentLoaded', function() {
             particle.style.animationDelay = Math.random() * 2 + 's';
             particlesContainer.appendChild(particle);
         }
-    }
-
-    // Intro animation sequence
-    const timeline = anime.timeline({
-        easing: 'easeOutExpo'
-    });
-
-    timeline
-        .add({
-            targets: '#intro-title',
-            opacity: [0, 1],
-            translateY: [30, 0],
-            duration: 1000,
-            delay: 300
-        })
-        .add({
-            targets: '#intro-text',
-            opacity: [0, 1],
-            translateY: [20, 0],
-            duration: 800
-        }, '-=500')
-        .add({
-            targets: '.intro-particle',
-            opacity: [0, 0.5],
-            scale: [0, 1],
-            delay: anime.stagger(10),
-            duration: 800
-        }, '-=800')
-        .add({
-            duration: 800,
-            complete: function() {
-                // Fade out intro section
-                anime({
-                    targets: '#intro-section',
-                    opacity: 0,
-                    duration: 800,
-                    easing: 'easeInOutQuad',
-                    complete: function() {
-                        // Hide intro section
-                        introSection.style.visibility = 'hidden';
-                        
-                        // Show main sections
-                        mainSections.forEach(section => {
-                            section.style.visibility = 'visible';
-                            anime({
-                                targets: section,
-                                opacity: [0, 1],
-                                duration: 800,
-                                easing: 'easeOutQuad'
-                            });
-                        });
-
-                        // Initialize AOS
-                        AOS.init({
-                            duration: 1000,
-                            once: true,
-                            offset: 100
-                        });
-                    }
-                });
-            }
+    
+        // Intro animation sequence
+        const timeline = anime.timeline({
+            easing: 'easeOutExpo'
         });
+    
+        timeline
+            .add({
+                targets: '#intro-title',
+                opacity: [0, 1],
+                translateY: [30, 0],
+                duration: 1000,
+                delay: 300
+            })
+            .add({
+                targets: '#intro-text',
+                opacity: [0, 1],
+                translateY: [20, 0],
+                duration: 800
+            }, '-=500')
+            .add({
+                targets: '.intro-particle',
+                opacity: [0, 0.5],
+                scale: [0, 1],
+                delay: anime.stagger(10),
+                duration: 800
+            }, '-=800')
+            .add({
+                duration: 800,
+                complete: function() {
+                    // Set localStorage to indicate intro has been shown
+                    localStorage.setItem('hasSeenIntro', 'true');
+                    
+                    // Fade out intro section
+                    anime({
+                        targets: '#intro-section',
+                        opacity: 0,
+                        duration: 800,
+                        easing: 'easeInOutQuad',
+                        complete: function() {
+                            // Hide intro section
+                            introSection.style.visibility = 'hidden';
+                            
+                            // Show main sections
+                            mainSections.forEach(section => {
+                                section.style.visibility = 'visible';
+                                anime({
+                                    targets: section,
+                                    opacity: [0, 1],
+                                    duration: 800,
+                                    easing: 'easeOutQuad'
+                                });
+                            });
+    
+                            // Initialize AOS
+                            AOS.init({
+                                duration: 1000,
+                                once: true,
+                                offset: 100
+                            });
+                        }
+                    });
+                }
+            });
+    }
 
     // Handle navigation clicks
     const navLinks = document.querySelectorAll('.nav-links a');
