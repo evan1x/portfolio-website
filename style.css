@@ -1612,9 +1612,11 @@ html {
     position: absolute;
     height: 100%;
     width: 2px;
-    background: linear-gradient(to bottom, rgba(75, 107, 251, 0.3), rgba(75, 107, 251, 0.8), rgba(75, 107, 251, 0.3));
+    background: linear-gradient(to bottom, rgba(75, 107, 251, 0.1), rgba(75, 107, 251, 0.8), rgba(75, 107, 251, 0.1));
     left: 50px;
     top: 0;
+    box-shadow: 0 0 8px rgba(75, 107, 251, 0.3);
+    border-radius: 1px;
 }
 
 .projects-timeline-item {
@@ -1640,7 +1642,7 @@ html {
     left: 41px;
     top: 15px;
     z-index: 10;
-    box-shadow: 0 0 0 4px rgba(75, 107, 251, 0.2);
+    box-shadow: 0 0 0 4px rgba(75, 107, 251, 0.2), 0 0 10px rgba(75, 107, 251, 0.4);
     transition: all 0.3s ease;
 }
 
@@ -1650,17 +1652,20 @@ html {
 }
 
 .projects-timeline-date {
-    min-width: 80px;
-    padding-right: 70px; 
-    text-align: right;
+    position: absolute;
+    left: -30px; 
+    top: 12px;
     font-weight: 600;
     color: #4B6BFB;
     font-size: 1.1rem;
-    margin-top: 12px;
     opacity: 0.9;
     transition: all 0.3s ease;
-    position: relative;
-    left: -40px; 
+    background-color: rgba(30, 30, 30, 0.8);
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    z-index: 5;
+    text-align: right;
+    min-width: 60px;
 }
 
 .projects-timeline-item:hover .projects-timeline-date {
@@ -1670,13 +1675,14 @@ html {
 
 .projects-timeline-content {
     flex: 1;
-    padding-left: 50px; 
+    padding-left: 100px; 
 }
 
 .projects-timeline-content .project-card {
     transform: none;
     transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
     border-left: 3px solid transparent;
+    padding: 2rem;
 }
 
 .projects-timeline-content .project-card:hover {
@@ -1684,24 +1690,112 @@ html {
     border-left: 3px solid #4B6BFB;
 }
 
+/* Improved mobile responsiveness for projects timeline */
 @media (max-width: 768px) {
+    .projects-timeline-container {
+        padding: 1rem 0.5rem;
+    }
+    
+    .projects-timeline {
+        margin-left: 20px;
+    }
+    
     .projects-timeline::before {
-        left: 30px;
+        left: 20px;
     }
     
     .projects-timeline-dot {
-        left: 21px;
+        left: 11px;
+        width: 16px;
+        height: 16px;
+        top: 12px;
     }
     
     .projects-timeline-date {
-        min-width: 70px;
-        padding-right: 30px;
+        left: -15px;
+        top: 12px;
         font-size: 0.9rem;
-        left: -25px;
+        background-color: transparent;
+        padding: 1.2rem;
+        min-width: 20px;
+        color: #4B6BFB;
     }
     
     .projects-timeline-content {
-        padding-left: 40px;
+        padding-left: 60px;
+        margin-top: 0;
+        width: 100%;
+    }
+    
+    .projects-timeline-content .project-card {
+        padding: 1.5rem;
+        margin-top: 0;
+    }
+    
+    .project-tags span {
+        font-size: 0.7rem;
+        padding: 0.2rem 0.5rem;
+        margin-right: 0.3rem;
+        margin-bottom: 0.3rem;
+    }
+    
+    .project-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 1rem;
+    }
+    
+    .project-links a {
+        margin: 0;
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+    .projects-timeline-container {
+        padding: 1rem 0;
+    }
+    
+    .projects-timeline {
+        padding: 1rem 0;
+        margin-left: 25px; 
+    }
+    
+    .projects-timeline::before {
+        left: 20px;
+    }
+    
+    .projects-timeline-dot {
+        left: 11px;
+        width: 14px;
+        height: 14px;
+        top: 10px;
+    }
+    
+    .projects-timeline-date {
+        left: -10px; 
+        top: 9px;
+        font-size: 0.7rem;
+    }
+    
+    .projects-timeline-content {
+        padding-left: 50px; 
+        margin-top: 5px;
+    }
+    
+    .project-card h3 {
+        font-size: 1.2rem;
+    }
+    
+    .project-card p {
+        font-size: 0.9rem;
+    }
+    
+    .project-tags {
+        margin-bottom: 0.8rem;
     }
 }
 
@@ -1713,4 +1807,117 @@ html {
     border-radius: 12px;
     overflow: hidden;
     transition: all 0.4s ease;
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+    .projects-timeline-container {
+        padding: 1rem 0;
+    }
+    
+    .projects-timeline {
+        padding: 1rem 0;
+        margin-left: 15px;
+    }
+    
+    .projects-timeline::before {
+        left: 15px;
+    }
+    
+    .projects-timeline-dot {
+        left: 6px;
+        width: 14px;
+        height: 14px;
+        top: 10px;
+    }
+    
+    .projects-timeline-date {
+        left: -20px;
+        top: 9px;
+        font-size: 0.8rem;
+        color: #4B6BFB;
+    }
+    
+    .projects-timeline-content {
+        padding-left: 45px;
+        margin-top: 0;
+    }
+    
+    .project-card h3 {
+        font-size: 1.2rem;
+        margin-top: 0;
+        margin-bottom: 0.8rem;
+    }
+    
+    .project-card p {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+    
+    .project-tags {
+        margin-bottom: 0.8rem;
+    }
+}
+
+/* Add explicit padding for project cards */
+.project-card {
+    padding: 2rem;
+}
+
+.project-card h3 {
+    margin-top: 0;
+    margin-bottom: 1.2rem;
+}
+
+.project-card p {
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 1.2rem;
+}
+
+.project-tags span {
+    background-color: rgba(75, 107, 251, 0.1);
+    color: #4B6BFB;
+    padding: 0.3rem 0.8rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.project-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.project-links a {
+    padding: 0.6rem 1.2rem;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #4B6BFB;
+    color: white;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: #4B6BFB;
+    border: 1px solid #4B6BFB;
+}
+
+.btn-primary:hover {
+    background-color: #3a54c4;
+}
+
+.btn-secondary:hover {
+    background-color: rgba(75, 107, 251, 0.1);
 }
