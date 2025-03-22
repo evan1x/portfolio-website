@@ -135,7 +135,7 @@ body.no-scroll {
     }
 }
 
-/* Header and Navigation */
+/* Navbar styles */
 nav {
     position: fixed;
     top: 0;
@@ -275,6 +275,7 @@ nav.scrolled {
     .nav-links li:nth-child(3) { transition-delay: 0.3s; }
     .nav-links li:nth-child(4) { transition-delay: 0.4s; }
     .nav-links li:nth-child(5) { transition-delay: 0.5s; }
+    .nav-links li:nth-child(6) { transition-delay: 0.6s; }
 
     /* Overlay for mobile menu */
     .nav-overlay {
@@ -290,11 +291,12 @@ nav.scrolled {
         transition: opacity 0.3s ease;
     }
 
-    .nav-overlay.active {
-        display: block;
-        opacity: 1;
+        .nav-overlay.active {
+            display: block;
+            opacity: 1;
+        }
     }
-}
+
 
 /* Enhanced Mobile Responsiveness */
 @media (max-width: 768px) {
@@ -1391,21 +1393,6 @@ section h3 {
 }
 
 /* Footer */
-.social-icons {
-    display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20rem;
-}
-
-    .footer-logo {
-        flex: 1;
-        min-width: 250px;
-        margin-bottom: 2rem;
-}
-
 footer {
     font-family: "Lexend Deca", serif;    
     text-align: center;
@@ -1414,13 +1401,27 @@ footer {
     color: #B0B0B0;
 }
 
+.footer-logo {
+    flex: 1;
+    min-width: 250px;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
 .social-icons {
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    gap: 1rem; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
     margin-bottom: 1.5rem;
-    padding-right: 21rem;
+    margin-left: -1.5rem; /* Move icons slightly to the left */
+    margin-right: -1rem; /* Move icons slightly to the right */
 }
 
 .social-icons img {
@@ -1432,6 +1433,21 @@ footer {
 
 .social-icons img:hover {
     transform: scale(1.2); 
+}
+
+/* Mobile Styles for Footer */
+@media (max-width: 768px) {
+    .social-icons {
+        padding: 0;
+        justify-content: center;
+        margin-bottom: 1rem;
+        margin-left: -1.5rem; /* Maintain the left shift on mobile */
+    }
+    
+    .social-icons img {
+        height: 35px;
+        width: 35px;
+    }
 }
 
 /* Mobile Styles */
