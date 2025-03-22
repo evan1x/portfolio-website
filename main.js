@@ -126,6 +126,8 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 // For external links like blog.html, just close the mobile menu
                 toggleMobileMenu(false);
+                // Don't prevent default behavior for external links
+                // The browser will naturally navigate to the href
             }
         });
     });
