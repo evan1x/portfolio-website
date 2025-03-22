@@ -248,7 +248,9 @@ nav.scrolled {
         backdrop-filter: blur(10px);
         flex-direction: column;
         justify-content: center;
-        padding: 2rem;
+        align-items: center;
+        padding: 0;
+        margin: 0;
         transition: right 0.3s ease-in-out;
         box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
         z-index: 1500;
@@ -287,7 +289,7 @@ nav.scrolled {
         height: 100%;
         background: rgba(0, 0, 0, 0.5);
         z-index: 1400;
-        opacity: 0;
+        opacity: 1;
         transition: opacity 0.3s ease;
     }
 
@@ -1449,32 +1451,6 @@ footer {
         width: 35px;
     }
 }
-
-/* Mobile Styles */
-@media (max-width: 768px) {
-    /* Mobile Navigation */
-    .nav-toggle {
-        display: block;
-    }
-
-    .nav-links {
-        position: fixed;
-        top: 70px;
-        left: 0;
-        right: 0;
-        background-color: #1E1E1E;
-        flex-direction: column;
-        align-items: center;
-        padding: 1rem;
-        gap: 1rem;
-        transform: translateY(-150%);
-        transition: transform 0.3s ease-in-out;
-    }
-
-    .nav-links.active {
-        transform: translateY(0);
-    }
-
     /* Project Cards */
     .projects {
         padding: 4rem 1rem;
@@ -1498,7 +1474,6 @@ footer {
     .contact-form {
         padding: 0 1rem;
     }
-}
 
 /* Small devices */
 @media (max-width: 480px) {
