@@ -186,51 +186,258 @@
         }
 
         .blog-hero {
-            min-height: 50vh;
-            background: linear-gradient(135deg, #302f2f, #000000);
+            min-height: 70vh;
+            position: relative;
+            background: linear-gradient(135deg, #1a1a1a, #000000);
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 10rem 1rem 3rem;
+            padding: 10rem 1rem 5rem;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        .blog-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(75, 107, 251, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 30%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        .hero-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
         }
 
         .hero-content {
             max-width: 800px;
+            position: relative;
+            z-index: 2;
         }
 
         .hero-content h1 {
-            font-size: 3.5rem;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
             margin-bottom: 1.5rem;
             font-weight: 700;
-            letter-spacing: -0.5px;
+            letter-spacing: -1px;
+            background: linear-gradient(to right, #ffffff, #919191);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            display: inline-block;
         }
 
-        .typing-text {
-            font-size: 1.2rem;
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 4vw, 1.4rem);
             color: #CBD5E1;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
+            font-family: "Lexend Deca", sans-serif;
+            opacity: 0.9;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #4B6BFB, #A78BFA, #4B6BFB);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 8s linear infinite;
+            font-weight: 600;
+        }
+
+        @keyframes shine {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        .hero-categories {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .hero-category {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            color: #ffffff;
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-category::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.6s ease;
+        }
+
+        .hero-category:hover::after {
+            left: 100%;
+        }
+
+        .hero-category:hover {
+            background-color: rgba(75, 107, 251, 0.2);
+            transform: translateY(-3px);
+            border-color: rgba(75, 107, 251, 0.3);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #CBD5E1;
+            font-size: 0.8rem;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+            z-index: 2;
+            margin-top: 3rem;
+        }
+
+        .scroll-indicator:hover {
+            opacity: 1;
+        }
+
+        .scroll-arrow {
+            width: 20px;
+            height: 30px;
+            border: 2px solid #CBD5E1;
+            border-radius: 10px;
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+
+        .scroll-arrow::before {
+            content: '';
+            position: absolute;
+            top: 6px;
+            left: 50%;
+            width: 4px;
+            height: 8px;
+            background: #CBD5E1;
+            border-radius: 2px;
+            transform: translateX(-50%);
+            animation: scrollDown 2s infinite;
+        }
+
+        @keyframes scrollDown {
+            0% { transform: translate(-50%, 0); opacity: 1; }
+            80% { transform: translate(-50%, 10px); opacity: 0; }
+            100% { transform: translate(-50%, 0); opacity: 0; }
+        }
+
+        /* Glitch effect for the title */
+        .glitch-text {
+            position: relative;
+        }
+
+        .glitch-text::before,
+        .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, #ffffff, #919191);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .glitch-text::before {
+            left: 2px;
+            text-shadow: -1px 0 #4B6BFB;
+            animation: glitch-animation-1 2s infinite linear alternate-reverse;
+        }
+
+        .glitch-text::after {
+            left: -2px;
+            text-shadow: 2px 0 #ff00ff;
+            animation: glitch-animation-2 3s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-animation-1 {
+            0% { clip-path: inset(30% 0 68% 0); }
+            20% { clip-path: inset(80% 0 18% 0); }
+            40% { clip-path: inset(54% 0 7% 0); }
+            60% { clip-path: inset(70% 0 2% 0); }
+            80% { clip-path: inset(23% 0 61% 0); }
+            100% { clip-path: inset(90% 0 3% 0); }
+        }
+
+        @keyframes glitch-animation-2 {
+            0% { clip-path: inset(21% 0 58% 0); }
+            20% { clip-path: inset(73% 0 5% 0); }
+            40% { clip-path: inset(26% 0 50% 0); }
+            60% { clip-path: inset(80% 0 8% 0); }
+            80% { clip-path: inset(15% 0 75% 0); }
+            100% { clip-path: inset(63% 0 23% 0); }
+        }
+
+        /* Particle animation */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+            }
+            25% {
+                transform: translateY(-15px) translateX(10px);
+            }
+            50% {
+                transform: translateY(5px) translateX(-10px);
+            }
+            75% {
+                transform: translateY(10px) translateX(5px);
+            }
         }
 
         .blog-container {
             max-width: 1000px;
             margin: 0 auto;
-            padding: 3rem 1.5rem;
+            padding: 4rem 1rem;
         }
 
         .featured-post {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-bottom: 4rem;
-            background-color: #1E1E1E;
-            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            background-color: #1a1a1a;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin-bottom: 3rem;
+            position: relative;
         }
 
         .featured-image-container {
-            height: 100%;
+            height: 300px;
             overflow: hidden;
         }
 
@@ -247,39 +454,39 @@
 
         .featured-content {
             padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
         }
 
         .featured-label {
             display: inline-block;
-            background-color: #4B6BFB;
-            color: #ffffff;
-            padding: 0.3rem 0.8rem;
-            border-radius: 5px;
+            background: linear-gradient(90deg, #4B6BFB, #A78BFA);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
             font-size: 0.8rem;
             font-weight: 600;
             margin-bottom: 1rem;
-        }
-
-        .blog-date {
-            color: #94A3B8;
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .blog-title {
             font-size: 1.8rem;
-            margin-bottom: 1rem;
-            color: #ffffff;
+            margin-bottom: 0.5rem;
             font-weight: 700;
+            color: #ffffff;
+        }
+
+        .blog-date {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-style: italic;
         }
 
         .blog-excerpt {
             color: #CBD5E1;
-            margin-bottom: 1.5rem;
             line-height: 1.6;
+            margin-bottom: 1.5rem;
         }
 
         .blog-tags {
@@ -293,30 +500,233 @@
             background-color: rgba(255, 255, 255, 0.1);
             color: #CBD5E1;
             padding: 0.3rem 0.8rem;
-            border-radius: 5px;
+            border-radius: 30px;
             font-size: 0.8rem;
         }
 
         .read-more {
-            color: #ffffff;
-            text-decoration: none;
-            font-weight: 600;
             display: inline-block;
-            transition: all 0.3s ease;
-        }
-
-        .read-more:hover {
             color: #4B6BFB;
-            filter: brightness(0.9);
+            font-weight: 600;
+            text-decoration: none;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
 
-        @media (max-width: 768px) {
+        .read-more::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #4B6BFB, #A78BFA);
+            transition: width 0.3s ease;
+        }
+
+        .read-more:hover::after {
+            width: 100%;
+        }
+
+        /* Full article modal */
+        .article-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .article-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .article-container {
+            background-color: #1a1a1a;
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            border-radius: 12px;
+            overflow-y: auto;
+            position: relative;
+            transform: translateY(50px);
+            opacity: 0;
+            transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1), 
+                        opacity 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .article-modal.active .article-container {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .article-header {
+            padding: 2rem;
+            position: relative;
+        }
+
+        .article-header-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .article-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            color: #94a3b8;
+        }
+
+        .article-date {
+            margin-right: 1.5rem;
+            font-style: italic;
+        }
+
+        .article-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-image {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 0.8rem;
+            object-fit: cover;
+        }
+
+        .article-content {
+            padding: 0 2rem 3rem;
+            color: #CBD5E1;
+            line-height: 1.8;
+        }
+
+        .article-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .article-content h2 {
+            margin: 2rem 0 1rem;
+            color: #ffffff;
+            font-size: 1.8rem;
+        }
+
+        .article-content h3 {
+            margin: 1.5rem 0 1rem;
+            color: #ffffff;
+            font-size: 1.4rem;
+        }
+
+        .article-content ul, .article-content ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .article-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .article-content a {
+            color: #4B6BFB;
+            text-decoration: none;
+            border-bottom: 1px dotted #4B6BFB;
+            transition: border-bottom 0.3s ease;
+        }
+
+        .article-content a:hover {
+            border-bottom: 1px solid #4B6BFB;
+        }
+
+        .close-article {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            z-index: 10;
+        }
+
+        .close-article:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .close-article::before, .close-article::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 2px;
+            background-color: white;
+        }
+
+        .close-article::before {
+            transform: rotate(45deg);
+        }
+
+        .close-article::after {
+            transform: rotate(-45deg);
+        }
+
+        /* Custom scrollbar for article */
+        .article-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .article-container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        .article-container::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+        }
+
+        .article-container::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        @media (min-width: 768px) {
             .featured-post {
-                grid-template-columns: 1fr;
+                flex-direction: row;
+                align-items: stretch;
             }
 
-            .featured-image {
-                height: 250px;
+            .featured-image-container {
+                width: 40%;
+                height: auto;
+            }
+
+            .featured-content {
+                width: 60%;
             }
         }
     </style>
@@ -338,28 +748,95 @@
     </nav>
 
     <section class="blog-hero">
+        <div id="hero-particles" class="hero-particles"></div>
         <div class="hero-content fade-in">
             <h1 class="glitch-text" data-text="My Blog">My Blog</h1>
+            <p class="hero-subtitle">Exploring <span class="gradient-text">Web Development & Design</span></p>
+            <div class="hero-categories">
+                <span class="hero-category">Web Development</span>
+                <span class="hero-category">HTML5</span>
+                <span class="hero-category">CSS3</span>
+                <span class="hero-category">JavaScript</span>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+            <p>Scroll down</p>
         </div>
     </section>
 
     <div class="blog-container">
         <div class="featured-post" data-aos="fade-up">
             <div class="featured-image-container">
-                <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97" alt="Featured blog post" class="featured-image">
+                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1172&q=80" alt="Featured blog post" class="featured-image">
             </div>
             <div class="featured-content">
                 <span class="featured-label">Featured Post</span>
-                <h2 class="blog-title">Building a Modern Portfolio Website with HTML, CSS, and JavaScript</h2>
-                <p class="blog-date">March 21, 2025</p>
-                <p class="blog-excerpt">In this comprehensive guide, I walk through the process of creating a responsive portfolio website from scratch using modern web technologies. Learn about the design decisions, animation techniques, and performance optimizations I implemented.</p>
+                <h2 class="blog-title">Hello, I'm Evan - A Full Stack Developer</h2>
+                <p class="blog-date">March 22, 2025</p>
+                <p class="blog-excerpt">Welcome to my blog! I'm a passionate full stack developer with expertise in modern web technologies. I love creating responsive, user-friendly applications and exploring new technologies to solve complex problems.</p>
                 <div class="blog-tags">
+                    <span class="blog-tag">About Me</span>
                     <span class="blog-tag">Web Development</span>
-                    <span class="blog-tag">HTML5</span>
-                    <span class="blog-tag">CSS3</span>
-                    <span class="blog-tag">JavaScript</span>
+                    <span class="blog-tag">Portfolio</span>
                 </div>
-                <a href="#" class="read-more">Read Full Article</a>
+                <a href="#" class="read-more" data-article="intro">Read Full Article</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Article Modal -->
+    <div class="article-modal" id="article-modal">
+        <div class="article-container">
+            <div class="close-article" id="close-article"></div>
+            <div class="article-header">
+                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1172&q=80" alt="Article header image" class="article-header-image">
+                <h1 class="article-title">Hello, I'm Evan - A Full Stack Developer</h1>
+                <div class="article-meta">
+                    <span class="article-date">March 22, 2025</span>
+                    <div class="article-author">
+                        <span>Evan Nickason</span>
+                    </div>
+                </div>
+            </div>
+            <div class="article-content">
+                <p>Welcome to my blog! I'm thrilled to have you here. This is where I share my thoughts, experiences, and insights about web development, programming, and technology in general.</p>
+                
+                <h2>Who Am I?</h2>
+                <p>I'm a full stack developer with a passion for creating elegant, efficient, and user-friendly web applications. My journey in the world of programming began several years ago when I built my first website using HTML and CSS. Since then, I've expanded my skills to include JavaScript, React, Node.js, and various other technologies that enable me to build complete web solutions from front to back.</p>
+                
+                <h2>What I Do</h2>
+                <p>My expertise spans across the entire web development spectrum:</p>
+                <ul>
+                    <li><strong>Frontend Development:</strong> I create responsive and intuitive user interfaces using HTML, CSS, JavaScript, and modern frameworks like React.</li>
+                    <li><strong>Backend Development:</strong> I build robust server-side applications using Node.js, Express, and work with databases like MongoDB and MySQL.</li>
+                    <li><strong>UI/UX Design:</strong> I have a keen eye for design and enjoy creating visually appealing interfaces that provide excellent user experiences.</li>
+                    <li><strong>Performance Optimization:</strong> I optimize web applications for speed and efficiency, ensuring they load quickly and run smoothly.</li>
+                </ul>
+                
+                <h2>My Approach to Development</h2>
+                <p>I believe in writing clean, maintainable code that solves real problems. My development philosophy centers around these principles:</p>
+                <ul>
+                    <li>User-centered design that prioritizes accessibility and usability</li>
+                    <li>Modular and reusable code that scales well</li>
+                    <li>Continuous learning and adaptation to new technologies</li>
+                    <li>Thorough testing and quality assurance</li>
+                </ul>
+                
+                <h2>What You'll Find on This Blog</h2>
+                <p>This blog is my platform to share knowledge, insights, and experiences from my journey as a developer. Here, you can expect to find:</p>
+                <ul>
+                    <li>Tutorials and guides on web development topics</li>
+                    <li>Case studies of projects I've worked on</li>
+                    <li>Reviews of tools and technologies I use</li>
+                    <li>Thoughts on industry trends and best practices</li>
+                    <li>Personal reflections on my growth as a developer</li>
+                </ul>
+                
+                <h2>Let's Connect</h2>
+                <p>I'm always open to connecting with fellow developers, potential clients, or anyone interested in technology. Feel free to reach out to me through the contact form on this site or connect with me on <a href="https://github.com/evan1x" target="_blank">GitHub</a> or <a href="https://www.linkedin.com/in/evan-nickason-229749325/" target="_blank">LinkedIn</a>.</p>
+                
+                <p>Thank you for visiting my blog. I hope you find the content here valuable and insightful. Stay tuned for regular updates!</p>
             </div>
         </div>
     </div>
@@ -402,6 +879,9 @@
                 offset: 100
             });
 
+            // Create particles for hero section
+            createParticles();
+
             // Animate hero section
             anime({
                 targets: '.blog-hero .hero-content',
@@ -411,23 +891,74 @@
                 easing: 'easeOutQuad'
             });
 
-            // Typing effect for the subtitle
-            const typingElement = document.querySelector('.typing-text');
-            if (typingElement) {
-                let i = 0;
-                typingElement.textContent = "";
-
-                function typeWriter() {
-                    if (i < textToType.length) {
-                        typingElement.textContent += textToType.charAt(i);
-                        i++;
-                        setTimeout(typeWriter, 50);
-                    }
-                }
-
-                setTimeout(typeWriter, 1000);
-            }
+            // Handle article modal
+            const modal = document.getElementById('article-modal');
+            const closeBtn = document.getElementById('close-article');
+            const readMoreLinks = document.querySelectorAll('.read-more');
             
+            // Open modal when clicking "Read Full Article"
+            readMoreLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Show modal with smooth animation
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden'; // Prevent scrolling
+                    
+                    // Animate article container entrance
+                    anime({
+                        targets: '.article-container',
+                        opacity: [0, 1],
+                        translateY: [50, 0],
+                        duration: 600,
+                        easing: 'cubicBezier(0.16, 1, 0.3, 1)'
+                    });
+                    
+                    // Animate article content elements
+                    anime({
+                        targets: '.article-header *, .article-content > *',
+                        opacity: [0, 1],
+                        translateY: [20, 0],
+                        delay: anime.stagger(50, {start: 300}),
+                        duration: 800,
+                        easing: 'easeOutQuad'
+                    });
+                });
+            });
+            
+            // Close modal when clicking the close button
+            closeBtn.addEventListener('click', closeModal);
+            
+            // Close modal when clicking outside the article container
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+            
+            // Close modal with escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && modal.classList.contains('active')) {
+                    closeModal();
+                }
+            });
+            
+            // Function to close the modal with animation
+            function closeModal() {
+                // Animate the container exit
+                anime({
+                    targets: '.article-container',
+                    opacity: [1, 0],
+                    translateY: [0, 30],
+                    duration: 400,
+                    easing: 'easeInOutQuad',
+                    complete: function() {
+                        modal.classList.remove('active');
+                        document.body.style.overflow = ''; // Re-enable scrolling
+                    }
+                });
+            }
+
             // Handle nav scroll effect
             const nav = document.querySelector('nav');
             window.addEventListener('scroll', function() {
@@ -437,6 +968,45 @@
                     nav.classList.remove('scrolled');
                 }
             });
+
+            // Create particles function
+            function createParticles() {
+                const particlesContainer = document.getElementById('hero-particles');
+                const particleCount = 50;
+                
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    
+                    // Random size between 1-4px
+                    const size = Math.random() * 3 + 1;
+                    
+                    // Random position
+                    const posX = Math.random() * 100;
+                    const posY = Math.random() * 100;
+                    
+                    // Random opacity
+                    const opacity = Math.random() * 0.5 + 0.1;
+                    
+                    // Random animation duration
+                    const duration = Math.random() * 20 + 10;
+                    
+                    // Apply styles
+                    particle.style.cssText = `
+                        position: absolute;
+                        width: ${size}px;
+                        height: ${size}px;
+                        background-color: rgba(255, 255, 255, ${opacity});
+                        left: ${posX}%;
+                        top: ${posY}%;
+                        border-radius: 50%;
+                        animation: float ${duration}s infinite ease-in-out;
+                        animation-delay: ${Math.random() * 5}s;
+                    `;
+                    
+                    particlesContainer.appendChild(particle);
+                }
+            }
 
             // Mobile menu toggle
             const navToggle = document.querySelector('.nav-toggle');

@@ -145,6 +145,7 @@
                     <div class="projects-timeline-content">
                         <div class="project-card">
                             <div class="project-preview">
+                                <img src="assets/images/portfolio-preview.jpg" alt="Portfolio Website Preview" class="preview-image">
                             </div>
                             <h3>Portfolio Website</h3>
                             <p>A modern, responsive portfolio showcasing my work and skills. Features smooth animations, particle effects, and an intuitive user interface. Implements best practices in web development and responsive design.</p>
@@ -169,6 +170,7 @@
                     <div class="projects-timeline-content">
                         <div class="project-card">
                             <div class="project-preview">
+                                <img src="assets/images/ace-electric-preview.jpg" alt="Ace Electric Website Preview" class="preview-image">
                             </div>
                             <h3>Ace Electric Website</h3>
                             <p>A professional business website for an electrical company. Features a modern design with Tailwind CSS, dynamic contact forms, service galleries, and testimonials. Optimized for performance and SEO.</p>
@@ -192,6 +194,7 @@
                     <div class="projects-timeline-content">
                         <div class="project-card">
                             <div class="project-preview">
+                                <img src="assets/images/searchweather-preview.jpg" alt="SearchWeather App Preview" class="preview-image">
                             </div>
                             <h3>SearchWeather App</h3>
                             <p>A sophisticated weather application leveraging the OpenWeather API. Features real-time weather data, 7-day forecasting, location search, and dynamic weather icons. Built with a focus on user experience and clean design.</p>
@@ -215,8 +218,7 @@
                     <div class="projects-timeline-content">
                         <div class="project-card">
                             <div class="project-preview">
-                                <div class="live-demo-container" id="spinni-demo">
-                                </div>
+                                <img src="assets/images/spinni-preview.jpg" alt="Spinni Engine Preview" class="preview-image">
                             </div>
                             <h3>Spinni Engine</h3>
                             <p>An innovative 3D ASCII rendering engine built from scratch. Features real-time rotation, shape morphing, and interactive controls. Implements complex mathematical algorithms for 3D transformations and ASCII character mapping.</p>
@@ -240,6 +242,7 @@
                     <div class="projects-timeline-content">
                         <div class="project-card">
                             <div class="project-preview">
+                                <img src="assets/images/sentiment-ai-preview.jpg" alt="Sentiment AI Preview" class="preview-image">
                             </div>
                             <h3>Sentiment AI</h3>
                             <p>A sentiment analysis model built with the TensorFlow library. Capable of identifying positive, negative, and neutral statements with accuracy.</p>
@@ -590,5 +593,20 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script src="contact.js"></script>
     <script src="intro-animation.js"></script>
+    <script>
+        // Handle image loading errors for project previews
+        document.addEventListener('DOMContentLoaded', function() {
+            const previewImages = document.querySelectorAll('.preview-image');
+            
+            previewImages.forEach(img => {
+                img.addEventListener('error', function() {
+                    // Add no-image class to parent when image fails to load
+                    this.parentElement.classList.add('no-image');
+                    // Remove the broken image
+                    this.style.display = 'none';
+                });
+            });
+        });
+    </script>
 </body>
 </html>
